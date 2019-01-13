@@ -11,15 +11,17 @@ namespace leagueManager.LIB
             INSERT INTO Type(
                 Name,
                 Description)
+            OUTPUT Inserted.Id
             VALUES(
                 @Name,
                 @Description)";
 
-            var result = ExecCommand(command, model);
+            var result = ExecCommandScaler<long>(command, model);
 
-            if (result)
+            if (result != 0)
                 return new TypeModel
                 {
+                    Id = result,
                     Name = model.Name,
                     Description = model.Description
                 };
