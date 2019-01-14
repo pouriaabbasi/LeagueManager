@@ -20,12 +20,12 @@ namespace leagueManager.LIB.Base
 
         public T SingleOrDefault<T>(string query)
         {
-            return SqlConnection.QuerySingleOrDefault(query);
+            return SqlConnection.QuerySingleOrDefault<T>(query);
         }
 
         public T FitstOrDefault<T>(string query)
         {
-            return SqlConnection.QueryFirstOrDefault(query);
+            return SqlConnection.QueryFirstOrDefault<T>(query);
         }
 
         public bool ExecCommand(string command, object parameterModel)
