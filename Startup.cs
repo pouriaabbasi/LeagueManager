@@ -43,6 +43,7 @@ namespace leagueManager
             });
 
             services.AddScoped<ITypeLib, TypeLib>();
+            services.AddScoped<IPlayerLib, PlayerLib>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

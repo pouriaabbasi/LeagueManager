@@ -29,13 +29,13 @@ namespace leagueManager.Controllers
         }
 
         [HttpPost]
-        public TypeModel AddType(AddTypeModel model)
+        public TypeModel AddType([FromBody]AddTypeModel model)
         {
             return _typeLib.AddType(model);
         }
 
         [HttpPut("{id}")]
-        public TypeModel UpdateType(long id, UpdateTypeModel model)
+        public TypeModel UpdateType(long id, [FromBody]UpdateTypeModel model)
         {
             return _typeLib.UpdateType(id, model);
         }
