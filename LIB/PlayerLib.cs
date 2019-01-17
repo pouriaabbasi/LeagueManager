@@ -73,7 +73,7 @@ FROM    Player";
             return result;
         }
 
-        public PlayerModel UpdatePlayer(long personId, UpdatePlayerModel model)
+        public PlayerModel UpdatePlayer(UpdatePlayerModel model)
         {
             var command = @"
 UPDATE  Player

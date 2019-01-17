@@ -37,7 +37,8 @@ namespace leagueManager.Controllers
         [HttpPut("{id}")]
         public TypeModel UpdateType(long id, [FromBody]UpdateTypeModel model)
         {
-            return _typeLib.UpdateType(id, model);
+            model.Id = id;
+            return _typeLib.UpdateType(model);
         }
 
         [HttpDelete("{id}")]

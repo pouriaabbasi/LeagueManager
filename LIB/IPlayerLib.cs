@@ -8,7 +8,7 @@ namespace leagueManager.LIB
         List<PlayerModel> GetPlayers();
         PlayerModel GetPlayer(long personId);
         PlayerModel AddPlayer(AddPlayerModel model);
-        PlayerModel UpdatePlayer(long personId, UpdatePlayerModel model);
+        PlayerModel UpdatePlayer(UpdatePlayerModel model);
         bool DeletePlayer(long personId);
     }
 }

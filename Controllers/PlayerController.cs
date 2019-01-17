@@ -38,7 +38,8 @@ namespace leagueManager.Controllers
         [HttpPut("{id}")]
         public PlayerModel UpdatePlayer(long id, [FromBody]UpdatePlayerModel model)
         {
-            return _playerLib.UpdatePlayer(id, model);
+            model.Id = id;
+            return _playerLib.UpdatePlayer(model);
         }
 
         [HttpDelete("{id}")]

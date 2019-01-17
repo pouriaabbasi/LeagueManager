@@ -57,10 +57,8 @@ WHERE   Id = {typeId}";
             return result;
         }
 
-        public TypeModel UpdateType(long typeId, UpdateTypeModel model)
+        public TypeModel UpdateType(UpdateTypeModel model)
         {
-            model.Id = typeId;
-
             var command = $@"
 UPDATE  [Type]
 SET     Name = @Name,
