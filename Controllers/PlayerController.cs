@@ -17,17 +17,17 @@ namespace leagueManager.Controllers
             _playerLib = playerLib;
         }
 
-        // [HttpGet]
-        // public List<TypeModel> GetTypes()
-        // {
-        //     return _typeLib.GetTypes();
-        // }
+        [HttpGet]
+        public List<PlayerModel> GetPlayers()
+        {
+            return _playerLib.GetPlayers();
+        }
 
-        // [HttpGet("{id}")]
-        // public TypeModel GetType(long id)
-        // {
-        //     return _typeLib.GetType(id);
-        // }
+        [HttpGet("{id}")]
+        public PlayerModel GetPlayer(long id)
+        {
+            return _playerLib.GetPlayer(id);
+        }
 
         [HttpPost]
         public PlayerModel AddPlayer([FromBody]AddPlayerModel model)
@@ -35,16 +35,16 @@ namespace leagueManager.Controllers
             return _playerLib.AddPlayer(model);
         }
 
-        // [HttpPut("{id}")]
-        // public TypeModel UpdateType(long id, [FromBody]UpdateTypeModel model)
-        // {
-        //     return _typeLib.UpdateType(id, model);
-        // }
+        [HttpPut("{id}")]
+        public PlayerModel UpdatePlayer(long id, [FromBody]UpdatePlayerModel model)
+        {
+            return _playerLib.UpdatePlayer(id, model);
+        }
 
-        // [HttpDelete("{id}")]
-        // public bool DeleteType(long id)
-        // {
-        //     return _typeLib.DeleteType(id);
-        // }
+        [HttpDelete("{id}")]
+        public bool DeletePlayer(long id)
+        {
+            return _playerLib.DeletePlayer(id);
+        }
     }
 }

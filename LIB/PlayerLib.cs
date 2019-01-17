@@ -35,22 +35,65 @@ namespace leagueManager.LIB
 
         public bool DeletePlayer(long personId)
         {
-            throw new System.NotImplementedException();
+            var command = @"
+DELETE  FROM Player
+WHERE   Id = @Id";
+
+            var result = ExecCommand(command, new { Id = personId });
+
+            return result;
         }
 
         public PlayerModel GetPlayer(long personId)
         {
-            throw new System.NotImplementedException();
+            var query = $@"
+SELECT  Id,
+        FirstName,
+        LastName,
+        Profile
+FROM    Player
+WHERE   Id = {personId}";
+
+            var result = FitstOrDefault<PlayerModel>(query);
+
+            return result;
         }
 
         public List<PlayerModel> GetPlayers()
         {
-            throw new System.NotImplementedException();
+            var query = @"
+SELECT  Id,
+        FirstName,
+        LastName,
+        Profile
+FROM    Player";
+
+            var result = GetList<PlayerModel>(query);
+
+            return result;
         }
 
         public PlayerModel UpdatePlayer(long personId, UpdatePlayerModel model)
         {
-            throw new System.NotImplementedException();
+            var command = @"
+UPDATE  Player
+SET     FirstName = @FirstName,
+        LastName = @LastName,
+        Profile = @Profile
+WHERE   Id = @Id";
+
+            var result = ExecCommand(command, model);
+
+            if (result)
+                return new PlayerModel
+                {
+                    Id = model.Id,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Profile = model.Profile
+                };
+
+            return null;
         }
     }
 }
