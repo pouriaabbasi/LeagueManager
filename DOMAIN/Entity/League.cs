@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using leagueManager.DOMAIN.Base;
 
 namespace leagueManager.DOMAIN.Entity
@@ -13,6 +14,7 @@ namespace leagueManager.DOMAIN.Entity
         public string Title { get; set; }
 
         public Type Type { get; set; }
+        public ICollection<LeaguePlayer> LeaguePlayers { get; set; }
 
     }
 }
