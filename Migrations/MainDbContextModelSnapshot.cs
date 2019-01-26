@@ -93,8 +93,12 @@ namespace leagueManager.Migrations
                     b.Property<string>("Description")
                         .HasMaxLength(2000);
 
+                    b.Property<bool>("IsContinuous");
+
                     b.Property<string>("Name")
                         .HasMaxLength(200);
+
+                    b.Property<int>("P2PPlayCount");
 
                     b.HasKey("Id");
 

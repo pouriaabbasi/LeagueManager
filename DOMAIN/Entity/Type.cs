@@ -7,6 +7,8 @@ namespace leagueManager.DOMAIN.Entity
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        public int P2PPlayCount { get; set; }
+        public bool IsContinuous { get; set; }
 
         public ICollection<League> Leagues { get; set; }
     }

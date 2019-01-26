@@ -1,34 +1,38 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { MatFormFieldModule, MatTableModule, MatInputModule, MatMenuModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
+import { BaseService } from './services/base.service';
+import { TypeService } from './services/type.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TypesComponent } from './components/types/types.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent
+    TypesComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
+    BrowserModule,
     FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-    ])
+    HttpClientModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatInputModule,
+    MatMenuModule,
+    MatFormFieldModule,
+    NgbModule
   ],
-  providers: [],
+  providers: [
+    BaseService,
+    TypeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
