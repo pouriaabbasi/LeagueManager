@@ -1,14 +1,2 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<!-- <div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-</div> -->
-<button mat-button [matMenuTriggerFor]="menu">Menu</button>
-<mat-menu #menu="matMenu">
-  <button mat-menu-item routerLink="/types">Types</button>
-  <button mat-menu-item routerLink="/leagues">Leagues</button>
-</mat-menu>
-
-
-<router-outlet></router-outlet>
+<app-sidenav></app-sidenav>
+<router-outlet style="z-index: 0"></router-outlet>

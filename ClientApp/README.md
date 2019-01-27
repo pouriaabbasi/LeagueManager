@@ -1,27 +1,30 @@
-# ClientApp
+# angular-material-6-theme
+Angular Material 6 Free theme. 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.2.
+This theme is developed using the Angular 6 and Material 6 at Ampersand Academy. 
 
-## Development server
+# Install Locally
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Step1: Please download this repo
 
-## Code scaffolding
+Step2: Execute the below command.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+```
+cd angular-material-6-theme
+npm install
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Step3: In app.module.ts file, replace YOUR_GOOGLE_MAP_API_KEY with actual google map api key.
 
-## Running unit tests
+Step4: Run 
+```
+ng serve --open
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# Demo
+https://ampersandacademy.com/angular-material-6-theme/
 
-## Running end-to-end tests
+# Preview
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+<img src="dashboard.png" width="900px" height="">

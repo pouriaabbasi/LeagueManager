@@ -1,44 +1,97 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MatFormFieldModule, MatTableModule, MatDialogModule, MatInputModule, MatMenuModule } from '@angular/material';
-import { FormsModule } from '@angular/forms';
-import { BaseService } from './services/base.service';
-import { TypeService } from './services/type.service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TypesComponent } from './components/types/types.component';
-import { TypeFormComponent } from './components/types/type-form/type-form.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { RouterModule } from '@angular/router';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ChartModule } from 'angular2-chartjs';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
+import { UserprofileComponent } from './userprofile/userprofile.component';
+import { TablelistComponent } from './tablelist/tablelist.component';
+import { TypoComponent } from './typo/typo.component';
+import { IconsComponent } from './icons/icons.component';
+import { MapsComponent } from './maps/maps.component';
+import { NotificationComponent } from './notification/notification.component';
+import { AgmCoreModule } from '@agm/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { TypesComponent } from './COMPONENTS/types/types.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TypesComponent,
-    TypeFormComponent
+    SidenavComponent,
+    DashboardComponent,
+    UserprofileComponent, TablelistComponent, TypoComponent, IconsComponent, MapsComponent, NotificationComponent, TypesComponent,
   ],
   imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'YOUR_GOOGLE_MAP_API_KEY'
+    }),
     MatTableModule,
+    MatSnackBarModule,
+    MatCheckboxModule,
+    ChartModule,
     MatInputModule,
-    MatMenuModule,
     MatFormFieldModule,
-    NgbModule,
-    MatDialogModule,
-    MatCheckboxModule
+    MatBadgeModule,
+    MatMenuModule,
+    LayoutModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    RouterModule,
+    HttpClientModule,
+    RouterModule.forRoot([
+      {
+        path: '',
+        component: DashboardComponent
+      },
+      {
+        path: 'types',
+        component: TypesComponent
+      },
+      //---------------------------------
+      {
+        path: 'user',
+        component: UserprofileComponent
+      },
+      {
+        path: 'table',
+        component: TablelistComponent
+      },
+      {
+        path: 'typo',
+        component: TypoComponent
+      },
+      {
+        path: 'icons',
+        component: IconsComponent
+      },
+      {
+        path: 'maps',
+        component: MapsComponent
+      },
+      {
+        path: 'notify',
+        component: NotificationComponent
+      }
+    ]),
   ],
-  providers: [
-    BaseService,
-    TypeService
-  ],
-  bootstrap: [AppComponent],
-  entryComponents: [TypeFormComponent]
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
