@@ -11,11 +11,15 @@ namespace leagueManager.LIB
             var command = $@"
             INSERT INTO Type(
                 Name,
-                Description)
+                Description,
+                P2PPlayCount,
+                IsContinuous)
             OUTPUT Inserted.Id
             VALUES(
                 @Name,
-                @Description)";
+                @Description,
+                @P2PPlayCount,
+                @IsContinuous)";
 
             var result = ExecCommandScaler<long>(command, model);
 
@@ -24,7 +28,9 @@ namespace leagueManager.LIB
                 {
                     Id = result,
                     Name = model.Name,
-                    Description = model.Description
+                    Description = model.Description,
+                    P2PPlayCount = model.P2PPlayCount,
+                    IsContinuous = model.IsContinuous
                 };
 
             return null;
@@ -35,7 +41,9 @@ namespace leagueManager.LIB
             var query = @"
 SELECT  Id,
         Name,
-        [Description]
+        [Description],
+        P2PPlayCount,
+        IsContinuous
 FROM    [Type]";
 
             var result = GetList<TypeModel>(query);
@@ -48,7 +56,9 @@ FROM    [Type]";
             var query = $@"
 SELECT  Id,
         Name,
-        [Description]
+        [Description],
+        P2PPlayCount,
+        IsContinuous
 FROM    [Type]
 WHERE   Id = {typeId}";
 
@@ -62,7 +72,9 @@ WHERE   Id = {typeId}";
             var command = $@"
 UPDATE  [Type]
 SET     Name = @Name,
-        [Description] = @Description
+        [Description] = @Description,
+        P2PPlayCount = @P2PPlayCount,
+        IsContinuous = @IsContinuous
 WHERE   Id = @Id";
 
             var result = ExecCommand(command, model);

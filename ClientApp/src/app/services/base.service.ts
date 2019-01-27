@@ -12,7 +12,11 @@ export class BaseService {
   constructor(
     private http: HttpClient) { }
 
-  public Get<T>(url): Observable<T> {
+  public Get<T>(url: string): Observable<T> {
     return this.http.get<T>(this._baseUrl + url);
+  }
+
+  public Post<T>(url: string, model: any): Observable<T> {
+    return this.http.post<T>(this._baseUrl + url, model);
   }
 }
