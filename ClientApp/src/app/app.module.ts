@@ -25,13 +25,14 @@ import { AgmCoreModule } from '@agm/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TypesComponent } from './COMPONENTS/types/types.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TypeModalComponent } from './COMPONENTS/types/type-modal/type-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent,
     DashboardComponent,
-    UserprofileComponent, TablelistComponent, TypoComponent, IconsComponent, MapsComponent, NotificationComponent, TypesComponent,
+    UserprofileComponent, TablelistComponent, TypoComponent, IconsComponent, MapsComponent, NotificationComponent, TypesComponent, TypeModalComponent,
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -63,6 +64,10 @@ import { HttpClientModule } from '@angular/common/http';
       {
         path: 'types',
         component: TypesComponent
+      },
+      {
+        path: 'addtype',
+        component: TypeModalComponent
       },
       //---------------------------------
       {
