@@ -56,7 +56,7 @@
   </div>
 </div> -->
 <br>
-<button class="btn btn-success">ADD</button>
+<button class="btn btn-success" (click)="newType()">ADD</button>
 <div class="row">
   <div class="col col-md-3">NAME</div>
   <div class="col col-md-3">DESCRIPTION</div>
@@ -73,7 +73,19 @@
   <div class="col col-md-2"><input type="checkbox" [(ngModel)]="type.isContinuous"></div>
   <div class="col col-md-2"><input type="checkbox" [(ngModel)]="type.p2PPlayCount"></div>
   <div class="col col-md-2">
-    <button class="btn btn-primary">edit</button>
+    <button class="btn btn-primary" (click)="selectType(type)">edit</button>
     <button class="btn btn-warning">delete</button>
   </div>
+</div>
+
+<div *ngIf="type">
+  <label>NAME : </label><input type="text" [(ngModel)]="type.name">
+  <br>
+  <label>DESCRIPTION : </label><textarea [(ngModel)]="type.description"></textarea>
+  <br>
+  <label>IS CONTINUOUES : </label><input type="checkbox" [(ngModel)]="type.isContinuous">
+  <br>
+  <label>P2P PLAY COUNT : </label><input type="checkbox" [(ngModel)]="type.p2PPlayCount">
+  <br>
+  <button class="btn btn-info" (click)="submit()">SUBMIT</button>
 </div>
