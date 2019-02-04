@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -35,6 +36,7 @@ import { TypeModalComponent } from './COMPONENTS/types/type-modal/type-modal.com
     UserprofileComponent, TablelistComponent, TypoComponent, IconsComponent, MapsComponent, NotificationComponent, TypesComponent, TypeModalComponent,
   ],
   imports: [
+    FormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAP_API_KEY'
     }),
