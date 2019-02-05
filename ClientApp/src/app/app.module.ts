@@ -27,13 +27,14 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TypesComponent } from './COMPONENTS/types/types.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TypeModalComponent } from './COMPONENTS/types/type-modal/type-modal.component';
+import { LeaguesComponent } from './COMPONENTS/leagues/leagues.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent,
     DashboardComponent,
-    UserprofileComponent, TablelistComponent, TypoComponent, IconsComponent, MapsComponent, NotificationComponent, TypesComponent, TypeModalComponent,
+    UserprofileComponent, TablelistComponent, TypoComponent, IconsComponent, MapsComponent, NotificationComponent, TypesComponent, TypeModalComponent, LeaguesComponent,
   ],
   imports: [
     FormsModule,
@@ -68,8 +69,8 @@ import { TypeModalComponent } from './COMPONENTS/types/type-modal/type-modal.com
         component: TypesComponent
       },
       {
-        path: 'addtype',
-        component: TypeModalComponent
+        path: 'leagues',
+        component: LeaguesComponent
       },
       //---------------------------------
       {

@@ -70,11 +70,15 @@
   <div class="col col-md-3">
     <P>{{type.description}}</P>
   </div>
-  <div class="col col-md-2"><input type="checkbox" [(ngModel)]="type.isContinuous"></div>
-  <div class="col col-md-2"><input type="checkbox" [(ngModel)]="type.p2PPlayCount"></div>
   <div class="col col-md-2">
-    <button class="btn btn-primary" (click)="selectType(type)">edit</button>
-    <button class="btn btn-warning">delete</button>
+    <P>{{type.isContinuous}}</P>
+  </div>
+  <div class="col col-md-2">
+    <p>{{type.p2PPlayCount}}</p>
+  </div>
+  <div class="col col-md-2">
+    <button class="btn btn-warning" (click)="selectType(type)">edit</button>
+    <button class="btn btn-danger" (click)="deleteType(type)">delete</button>
   </div>
 </div>
 
@@ -85,7 +89,7 @@
   <br>
   <label>IS CONTINUOUES : </label><input type="checkbox" [(ngModel)]="type.isContinuous">
   <br>
-  <label>P2P PLAY COUNT : </label><input type="checkbox" [(ngModel)]="type.p2PPlayCount">
+  <label>P2P PLAY COUNT : </label><input type="number" min="1" max="15" [(ngModel)]="type.p2PPlayCount">
   <br>
   <button class="btn btn-info" (click)="submit()">SUBMIT</button>
 </div>

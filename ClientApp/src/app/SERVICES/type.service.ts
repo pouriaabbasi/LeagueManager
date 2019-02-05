@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
 import { Observable } from 'rxjs';
-import { TypeModel } from '../MODELS/type.model';
-import { AddTypeModel } from '../MODELS/add-type.model';
-import { UpdateTypeModel } from '../MODELS/update-type.model';
+import { TypeModel } from '../MODELS/type/type.model';
+import { AddTypeModel } from '../MODELS/type/add-type.model';
+import { UpdateTypeModel } from '../MODELS/type/update-type.model';
 
 @Injectable({
   providedIn: 'root'

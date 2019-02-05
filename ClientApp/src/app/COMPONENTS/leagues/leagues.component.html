@@ -1,0 +1,54 @@
+<br>
+<button class="btn btn-success" (click)="newLeague()">ADD</button>
+<div class="row">
+  <div class="col col-md-2">TITLE</div>
+  <div class="col col-md-1">TYPE</div>
+  <div class="col col-md-1">ITERATION</div>
+  <div class="col col-md-2">START DATE</div>
+  <div class="col col-md-2">END DATE</div>
+  <div class="col col-md-2">IS COMPLETED</div>
+</div>
+<div class="row" *ngFor="let league of leagues">
+  <div class="col col-md-2">
+    <p>{{league.title}}</p>
+  </div>
+  <div class="col col-md-1">
+    <p>{{league.typeId}}</p>
+  </div>
+  <div class="col col-md-1">
+    <p>{{league.iteration}}</p>
+  </div>
+  <div class="col col-md-2">
+    <p>{{league.startDate | date:'yyyy/MM/dd'}}</p>
+  </div>
+  <div class="col col-md-2">
+    <p>{{league.endDate | date:'yyyy/MM/dd'}}</p>
+  </div>
+  <div class="col col-md-2">
+    <p>{{league.isCompleted}}</p>
+  </div>
+  <div class="col col-md-2">
+    <button class="btn btn-warning" (click)="selectLeague(league)">edit</button>
+    <button class="btn btn-danger" (click)="deleteLeague(league)">delete</button>
+  </div>
+</div>
+
+<div *ngIf="league">
+  <label for="title">TITLE : </label><input type="text" name="title" id="title" [(ngModel)]="league.title">
+  <br>
+  <label for="type">TYPE : </label>
+  <select name="typeId" id="typeId" [(ngModel)]="league.typeId">
+    <option *ngFor="let type of types" value="{{type.id}}">{{type.name}}</option>
+  </select>
+  <br>
+  <label for="iteration">ITERATION : </label><input type="number" name="iteration" id="iteration" [(ngModel)]="league.iteration">
+  <br>
+  <label for="startDate">START DATE : </label><input type="date" name="startDate" id="startDate" [(ngModel)]="league.startDate">
+  <br>
+  <label for="endDate">END DATE : </label><input type="date" name="endDate" id="endDate" [(ngModel)]="league.endDate">
+  <br>
+  <label for="isCompleted">IS COMPLETED : </label><input type="checkbox" name="isCompleted" id="isCompleted"
+    [(ngModel)]="league.isCompleted">
+  <br>
+  <button class="btn btn-info" (click)="submit()">SUBMIT</button>
+</div>
