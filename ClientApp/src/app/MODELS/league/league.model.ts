@@ -9,4 +9,5 @@ export class LeagueModel {
     endDatePersian: string;
     isCompleted: boolean;
     title: string;
+    playerCount: number;
 }

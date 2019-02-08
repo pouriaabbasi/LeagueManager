@@ -10,5 +10,6 @@ namespace leagueManager.LIB
         LeagueModel AddLeague(AddLeagueModel model);
         LeagueModel UpdateLeague(UpdateLeagueModel model);
         bool DeleteLeague(long leagueId);
+        bool AddPlayerToLeague(AddPlayerToLeagueModel model);
     }
 }

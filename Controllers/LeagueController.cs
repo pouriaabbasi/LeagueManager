@@ -45,5 +45,11 @@ namespace leagueManager.Controllers
         {
             return _leagueLib.DeleteLeague(id);
         }
+
+        [HttpPost]
+        public bool AddPlayerToLeague(AddPlayerToLeagueModel model)
+        {
+            return _leagueLib.AddPlayerToLeague(model);
+        }
     }
 }

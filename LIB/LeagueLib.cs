@@ -62,8 +62,9 @@ SELECT  Id,
         StartDate,
         EndDate,
         IsCompleted,
-        Title
-FROM    League
+        Title,
+        (SELECT COUNT(*) FROM LeaguePlayer WHERE LeagueId=L.Id) AS PlayerCount
+FROM    League AS L
 WHERE   Id = {leagueId}";
 
             var result = FitstOrDefault<LeagueModel>(query);
@@ -81,7 +82,8 @@ SELECT  L.Id,
         L.EndDate,
         L.IsCompleted,
         L.Title,
-        T.Name AS TypeName
+        T.Name AS TypeName,
+        (SELECT COUNT(*) FROM LeaguePlayer WHERE LeagueId=L.Id) AS PlayerCount
 FROM    League AS L
         INNER JOIN Type AS T ON L.TypeId = T.Id";
 
@@ -117,5 +119,24 @@ WHERE   Id = @Id";
 
             return null;
         }
+
+        public bool AddPlayerToLeague(AddPlayerToLeagueModel model)
+        {
+            var command = @"
+INSERT INTO LeaguePlayer(
+    LeagueId,
+    PlayerId
+)
+OUTPUT inserted.Id
+VALUES(
+    @LeagueId,
+    @PlayerId
+)";
+            var result = ExecCommand(command, model);
+
+            return result ? true : false;
+        }
+
+
     }
 }

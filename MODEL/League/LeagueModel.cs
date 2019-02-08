@@ -15,5 +15,6 @@ namespace leagueManager.MODEL.League
         public string EndDatePersian => EndDate.ConvertToPersianDate();
         public bool IsCompleted { get; set; }
         public string Title { get; set; }
+        public int PlayerCount { get; set; }
     }
 }
