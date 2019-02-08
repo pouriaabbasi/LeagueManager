@@ -28,13 +28,14 @@ import { TypesComponent } from './COMPONENTS/types/types.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TypeModalComponent } from './COMPONENTS/types/type-modal/type-modal.component';
 import { LeaguesComponent } from './COMPONENTS/leagues/leagues.component';
+import { PlayerComponent } from './COMPONENTS/player/player.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent,
     DashboardComponent,
-    UserprofileComponent, TablelistComponent, TypoComponent, IconsComponent, MapsComponent, NotificationComponent, TypesComponent, TypeModalComponent, LeaguesComponent,
+    UserprofileComponent, TablelistComponent, TypoComponent, IconsComponent, MapsComponent, NotificationComponent, TypesComponent, TypeModalComponent, LeaguesComponent, PlayerComponent,
   ],
   imports: [
     FormsModule,
@@ -71,6 +72,10 @@ import { LeaguesComponent } from './COMPONENTS/leagues/leagues.component';
       {
         path: 'leagues',
         component: LeaguesComponent
+      },
+      {
+        path: 'players',
+        component: PlayerComponent
       },
       //---------------------------------
       {

@@ -17,7 +17,7 @@ INSERT INTO League(
     IsCompleted,
     Title)
 OUTPUT Inserted.Id
-VALUE(
+VALUES(
     @TypeId,
     @Iteration,
     @StartDate,
@@ -74,14 +74,16 @@ WHERE   Id = {leagueId}";
         public List<LeagueModel> GetLeagues()
         {
             var query = @"
-SELECT  Id,
-        TypeId,
-        Iteration,
-        StartDate,
-        EndDate,
-        IsCompleted,
-        Title
-FROM    League";
+SELECT  L.Id,
+        L.TypeId,
+        L.Iteration,
+        L.StartDate,
+        L.EndDate,
+        L.IsCompleted,
+        L.Title,
+        T.Name AS TypeName
+FROM    League AS L
+        INNER JOIN Type AS T ON L.TypeId = T.Id";
 
             var result = GetList<LeagueModel>(query);
 

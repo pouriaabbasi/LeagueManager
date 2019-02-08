@@ -13,16 +13,16 @@
     <p>{{league.title}}</p>
   </div>
   <div class="col col-md-1">
-    <p>{{league.typeId}}</p>
+    <p>{{league.typeName}}</p>
   </div>
   <div class="col col-md-1">
     <p>{{league.iteration}}</p>
   </div>
   <div class="col col-md-2">
-    <p>{{league.startDate | date:'yyyy/MM/dd'}}</p>
+    <p>{{league.startDatePersian}}</p>
   </div>
   <div class="col col-md-2">
-    <p>{{league.endDate | date:'yyyy/MM/dd'}}</p>
+    <p>{{league.endDatePersian}}</p>
   </div>
   <div class="col col-md-2">
     <p>{{league.isCompleted}}</p>
@@ -30,6 +30,7 @@
   <div class="col col-md-2">
     <button class="btn btn-warning" (click)="selectLeague(league)">edit</button>
     <button class="btn btn-danger" (click)="deleteLeague(league)">delete</button>
+    <button class="btn btn-info" (click)="addPlayerToLeague(league)">add player</button>
   </div>
 </div>
 
@@ -51,4 +52,8 @@
     [(ngModel)]="league.isCompleted">
   <br>
   <button class="btn btn-info" (click)="submit()">SUBMIT</button>
+</div>
+
+<div *ngIf="addPlayer">
+  IMPLEMENTE!!!
 </div>

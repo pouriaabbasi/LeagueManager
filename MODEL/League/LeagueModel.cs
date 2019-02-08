@@ -7,6 +7,7 @@ namespace leagueManager.MODEL.League
     {
         public long Id { get; set; }
         public long TypeId { get; set; }
+        public string TypeName { get; set; }
         public int Iteration { get; set; }
         public DateTime StartDate { get; set; }
         public string StartDatePersian => StartDate.ConvertToPersianDate();

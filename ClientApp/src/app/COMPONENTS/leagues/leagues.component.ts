@@ -16,6 +16,7 @@ export class LeaguesComponent implements OnInit {
   leagues: LeagueModel[] = [];
   types: TypeModel[] = [];
   league: LeagueModel;
+  addPlayer: LeagueModel;
 
   constructor(
     private leagueService: LeagueService,
@@ -84,5 +85,9 @@ export class LeaguesComponent implements OnInit {
         })
       }
     }
+  }
+
+  private addPlayerToLeague(league: LeagueModel) {
+    this.addPlayer = league;
   }
 }

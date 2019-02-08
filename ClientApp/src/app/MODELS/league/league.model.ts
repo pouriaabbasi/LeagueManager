@@ -4,7 +4,9 @@ export class LeagueModel {
     typeName: string;
     iteration: number;
     startDate: Date;
+    startDatePersian: string;
     endDate: Date;
+    endDatePersian: string;
     isCompleted: boolean;
     title: string;
 }

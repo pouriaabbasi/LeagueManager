@@ -1,0 +1,26 @@
+<br>
+<button class="btn btn-success" (click)="newPlayer()">ADD</button>
+<div class="row">
+  <div class="col col-md-5">FIRST NAME</div>
+  <div class="col col-md-5">LAST NAME</div>
+</div>
+<div class="row" *ngFor="let player of players">
+  <div class="col col-md-5">
+    <p>{{player.firstName}}</p>
+  </div>
+  <div class="col col-md-5">
+    <p>{{player.lastName}}</p>
+  </div>
+  <div class="col col-md-2">
+    <button class="btn btn-warning" (click)="editPlayer(player)">edit</button>
+    <button class="btn btn-danger" (click)="deletePlayer(player)">delete</button>
+  </div>
+</div>
+
+<div *ngIf="player">
+  <label for="firstName">FIRST NAME : </label><input type="text" name="firstName" id="firstName" [(ngModel)]="player.firstName">
+  <br>
+  <label for="lastName">LAST NAME : </label><input type="text" name="lastName" id="lastName" [(ngModel)]="player.lastName">
+  <br>
+  <button class="btn btn-info" (click)="submit()">SUBMIT</button>
+</div>
