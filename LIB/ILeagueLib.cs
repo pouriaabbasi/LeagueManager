@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using leagueManager.MODEL.League;
+using leagueManager.MODEL.Player;
 
 namespace leagueManager.LIB
 {
@@ -11,5 +12,9 @@ namespace leagueManager.LIB
         LeagueModel UpdateLeague(UpdateLeagueModel model);
         bool DeleteLeague(long leagueId);
         bool AddPlayerToLeague(AddPlayerToLeagueModel model);
+        List<PlayerModel> GetLeaguePlayers(long leagueId);
+        List<LeagueMatchModel> GenerateLeagueMatches(long leagueId);
+        List<LeagueMatchModel> GetLeagueMatches(long leagueId);
+        bool SetMatchResult(SetMatchResultModel model);
     }
 }

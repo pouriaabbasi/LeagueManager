@@ -8,6 +8,8 @@ import { AddLeagueModel } from 'src/app/MODELS/league/add-league.model';
 import { AddPlayerToLeagueModel } from 'src/app/MODELS/league/add-player-to-league.model';
 import { PlayerModel } from 'src/app/MODELS/player/player.model';
 import { PlayerService } from 'src/app/SERVICES/player.service';
+import { LeagueMatchModel } from 'src/app/MODELS/league/league-match.model';
+import { SetMatchResultModel } from 'src/app/MODELS/league/set-match-result.model';
 
 @Component({
   selector: 'app-leagues',
@@ -21,6 +23,8 @@ export class LeaguesComponent implements OnInit {
   players: PlayerModel[] = [];
   league: LeagueModel;
   addPlayer: AddPlayerToLeagueModel;
+  matches: LeagueMatchModel[];
+  matchResult: SetMatchResultModel;
 
   constructor(
     private leagueService: LeagueService,
@@ -109,5 +113,26 @@ export class LeaguesComponent implements OnInit {
       this.addPlayer = null;
       this.refreshGrid();
     })
+  }
+
+  private showMatches(leagueId: number) {
+    this.leagueService.ShowMatches(leagueId).subscribe(matches => {
+      this.matches = matches;
+    })
+  }
+
+  private setMatchResult(match: LeagueMatchModel) {
+    this.matchResult = new SetMatchResultModel();
+    this.matchResult.leagueId = match.leagueId;
+    this.matchResult.leagueMatchId = match.leagueMatchId;
+  }
+
+  private setResult() {
+    this.leagueService.SetMatchResult(this.matchResult).subscribe(result => {
+      if (result) {
+        this.showMatches(this.matchResult.leagueId);
+        this.matchResult = null;
+      }
+    });
   }
 }

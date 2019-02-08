@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using leagueManager.LIB;
 using leagueManager.MODEL.League;
+using leagueManager.MODEL.Player;
 using Microsoft.AspNetCore.Mvc;
 
 namespace leagueManager.Controllers
@@ -50,6 +51,29 @@ namespace leagueManager.Controllers
         public bool AddPlayerToLeague(AddPlayerToLeagueModel model)
         {
             return _leagueLib.AddPlayerToLeague(model);
+        }
+
+        [HttpGet]
+        public List<PlayerModel> GetLeaguePlayers(long id)
+        {
+            return _leagueLib.GetLeaguePlayers(id);
+        }
+
+        [HttpGet("{id}")]
+        public List<LeagueMatchModel> ShowMatches(long id)
+        {
+            var result = _leagueLib.GetLeagueMatches(id);
+            if (result != null && result.Count > 0)
+                return result;
+
+            return _leagueLib.GenerateLeagueMatches(id);
+        }
+
+        [HttpPut("{id}")]
+        public bool SetMatchResult(long id, SetMatchResultModel model)
+        {
+            model.LeagueMatchId = id;
+            return _leagueLib.SetMatchResult(model);
         }
     }
 }

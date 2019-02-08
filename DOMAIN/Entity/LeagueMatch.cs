@@ -1,3 +1,4 @@
+using System;
 using leagueManager.DOMAIN.Base;
 
 namespace leagueManager.DOMAIN.Entity
@@ -10,6 +11,7 @@ namespace leagueManager.DOMAIN.Entity
         public int? FirstPlayerScore { get; set; }
         public int? SecondPlayerScore { get; set; }
         public long? WinnerPlayerId { get; set; }
+        public DateTime? MatchDate { get; set; }
 
         public League League { get; set; }
         public Player FirstPlayer { get; set; }

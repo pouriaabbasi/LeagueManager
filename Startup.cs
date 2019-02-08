@@ -42,9 +42,9 @@ namespace leagueManager
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddScoped<ITypeLib, TypeLib>();
-            services.AddScoped<IPlayerLib, PlayerLib>();
-            services.AddScoped<ILeagueLib, LeagueLib>();
+            services.AddTransient<ITypeLib, TypeLib>();
+            services.AddTransient<IPlayerLib, PlayerLib>();
+            services.AddTransient<ILeagueLib, LeagueLib>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
