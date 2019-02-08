@@ -5,6 +5,9 @@ import { TypeModel } from 'src/app/MODELS/type/type.model';
 import { TypeService } from 'src/app/SERVICES/type.service';
 import { UpdateLeagueModel } from 'src/app/MODELS/league/update-league.model';
 import { AddLeagueModel } from 'src/app/MODELS/league/add-league.model';
+import { AddPlayerToLeagueModel } from 'src/app/MODELS/league/add-player-to-league.model';
+import { PlayerModel } from 'src/app/MODELS/player/player.model';
+import { PlayerService } from 'src/app/SERVICES/player.service';
 
 @Component({
   selector: 'app-leagues',
@@ -15,17 +18,20 @@ export class LeaguesComponent implements OnInit {
 
   leagues: LeagueModel[] = [];
   types: TypeModel[] = [];
+  players: PlayerModel[] = [];
   league: LeagueModel;
-  addPlayer: LeagueModel;
+  addPlayer: AddPlayerToLeagueModel;
 
   constructor(
     private leagueService: LeagueService,
-    private typeService: TypeService
+    private typeService: TypeService,
+    private playerService: PlayerService
   ) { }
 
   ngOnInit() {
     this.refreshGrid();
     this.fillTypes();
+    this.fillPlayers();
   }
 
   private refreshGrid(): void {
@@ -38,6 +44,12 @@ export class LeaguesComponent implements OnInit {
     this.typeService.GetTypes().subscribe(types => {
       this.types = types;
     });
+  }
+
+  private fillPlayers() {
+    this.playerService.GetPlayers().subscribe(players => {
+      this.players = players;
+    })
   }
 
   private selectLeague(league: LeagueModel) {
@@ -56,7 +68,7 @@ export class LeaguesComponent implements OnInit {
     }
   }
 
-  private submit() {
+  private submitLeague() {
     if (this.league) {
       if (this.league.id) {
         var updateLeagueModel = new UpdateLeagueModel();
@@ -88,6 +100,14 @@ export class LeaguesComponent implements OnInit {
   }
 
   private addPlayerToLeague(league: LeagueModel) {
-    this.addPlayer = league;
+    this.addPlayer = new AddPlayerToLeagueModel();
+    this.addPlayer.leagueId = league.id;
+  }
+
+  private submitAddPlayer() {
+    this.leagueService.AddPlayerToLeague(this.addPlayer).subscribe(() => {
+      this.addPlayer = null;
+      this.refreshGrid();
+    })
   }
 }

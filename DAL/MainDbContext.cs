@@ -12,12 +12,16 @@ namespace leagueManager.DAL
         public DbSet<Type> Types { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<League> Leagues { get; set; }
+        public DbSet<LeaguePlayer> LeaguePlayers { get; set; }
+        public DbSet<LeagueMatch> LeagueMatches { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new TypeMap());
             modelBuilder.ApplyConfiguration(new PlayerMap());
             modelBuilder.ApplyConfiguration(new LeagueMap());
+            modelBuilder.ApplyConfiguration(new LeaguePlayerMap());
+            modelBuilder.ApplyConfiguration(new LeagueMatchMap());
         }
     }
 }

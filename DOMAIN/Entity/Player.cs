@@ -10,5 +10,8 @@ namespace leagueManager.DOMAIN.Entity
         public string Profile { get; set; }
 
         public ICollection<LeaguePlayer> LeaguePlayers { get; set; }
+        public ICollection<LeagueMatch> FirstPlayers { get; set; }
+        public ICollection<LeagueMatch> SecondPlayers { get; set; }
+        public ICollection<LeagueMatch> WinnerPlayers { get; set; }
     }
 }

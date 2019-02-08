@@ -15,6 +15,6 @@ namespace leagueManager.DOMAIN.Entity
 
         public Type Type { get; set; }
         public ICollection<LeaguePlayer> LeaguePlayers { get; set; }
-
+        public ICollection<LeagueMatch> LeagueMatches { get; set; }
     }
 }

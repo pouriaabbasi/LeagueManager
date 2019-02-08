@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { LeagueModel } from '../MODELS/league/league.model';
 import { UpdateLeagueModel } from '../MODELS/league/update-league.model';
 import { AddLeagueModel } from '../MODELS/league/add-league.model';
+import { AddPlayerToLeagueModel } from '../MODELS/league/add-player-to-league.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,9 @@ export class LeagueService {
 
   public AddLeague(model: AddLeagueModel): Observable<LeagueModel> {
     return this.baseService.Post<LeagueModel>("League/AddLeague", model);
+  }
+
+  public AddPlayerToLeague(model: AddPlayerToLeagueModel): Observable<boolean> {
+    return this.baseService.Post<boolean>("League/AddPlayerToLeague", model);
   }
 }

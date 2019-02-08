@@ -136,7 +136,5 @@ VALUES(
 
             return result ? true : false;
         }
-
-
     }
 }
