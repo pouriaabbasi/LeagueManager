@@ -7,6 +7,7 @@ import { AddLeagueModel } from '../MODELS/league/add-league.model';
 import { AddPlayerToLeagueModel } from '../MODELS/league/add-player-to-league.model';
 import { LeagueMatchModel } from '../MODELS/league/league-match.model';
 import { SetMatchResultModel } from '../MODELS/league/set-match-result.model';
+import { LeagueRankModel } from '../MODELS/league/league-rank.model';
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +44,9 @@ export class LeagueService {
 
   public SetMatchResult(model: SetMatchResultModel): Observable<boolean> {
     return this.baseService.Put<boolean>("League/SetMatchResult/" + model.leagueMatchId, model);
+  }
+
+  public GetLeagueRank(leagueId: number): Observable<LeagueRankModel[]> {
+    return this.baseService.Get<LeagueRankModel[]>("League/GetLeagueRank/" + leagueId);
   }
 }

@@ -10,6 +10,7 @@ import { PlayerModel } from 'src/app/MODELS/player/player.model';
 import { PlayerService } from 'src/app/SERVICES/player.service';
 import { LeagueMatchModel } from 'src/app/MODELS/league/league-match.model';
 import { SetMatchResultModel } from 'src/app/MODELS/league/set-match-result.model';
+import { LeagueRankModel } from 'src/app/MODELS/league/league-rank.model';
 
 @Component({
   selector: 'app-leagues',
@@ -25,6 +26,7 @@ export class LeaguesComponent implements OnInit {
   addPlayer: AddPlayerToLeagueModel;
   matches: LeagueMatchModel[];
   matchResult: SetMatchResultModel;
+  leagueRanks: LeagueRankModel[];
 
   constructor(
     private leagueService: LeagueService,
@@ -58,10 +60,20 @@ export class LeaguesComponent implements OnInit {
 
   private selectLeague(league: LeagueModel) {
     this.league = league;
+
+    this.matches = null;
+    this.matchResult = null;
+    this.leagueRanks = null;
+    this.addPlayer = null;
   }
 
   private newLeague() {
     this.league = new LeagueModel();
+
+    this.matches = null;
+    this.matchResult = null;
+    this.leagueRanks = null;
+    this.addPlayer = null;
   }
 
   private deleteLeague(league: LeagueModel) {
@@ -106,6 +118,11 @@ export class LeaguesComponent implements OnInit {
   private addPlayerToLeague(league: LeagueModel) {
     this.addPlayer = new AddPlayerToLeagueModel();
     this.addPlayer.leagueId = league.id;
+
+    this.matches = null;
+    this.matchResult = null;
+    this.leagueRanks = null;
+    this.league = null;
   }
 
   private submitAddPlayer() {
@@ -118,6 +135,11 @@ export class LeaguesComponent implements OnInit {
   private showMatches(leagueId: number) {
     this.leagueService.ShowMatches(leagueId).subscribe(matches => {
       this.matches = matches;
+
+      this.addPlayer = null;
+      this.matchResult = null;
+      this.leagueRanks = null;
+      this.league = null;
     })
   }
 
@@ -134,5 +156,16 @@ export class LeaguesComponent implements OnInit {
         this.matchResult = null;
       }
     });
+  }
+
+  private getLeagueRank(leagueId) {
+    this.leagueService.GetLeagueRank(leagueId).subscribe(leagueRanks => {
+      this.leagueRanks = leagueRanks;
+
+      this.matches = null;
+      this.matchResult = null;
+      this.league = null;
+      this.addPlayer = null;
+    })
   }
 }

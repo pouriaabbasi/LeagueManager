@@ -75,5 +75,11 @@ namespace leagueManager.Controllers
             model.LeagueMatchId = id;
             return _leagueLib.SetMatchResult(model);
         }
+
+        [HttpGet("{id}")]
+        public List<LeagueRankModel> GetLeagueRank(long id)
+        {
+            return _leagueLib.GetLeagueRank(id);
+        }
     }
 }

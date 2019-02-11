@@ -16,5 +16,6 @@ namespace leagueManager.LIB
         List<LeagueMatchModel> GenerateLeagueMatches(long leagueId);
         List<LeagueMatchModel> GetLeagueMatches(long leagueId);
         bool SetMatchResult(SetMatchResultModel model);
+        List<LeagueRankModel> GetLeagueRank(long leagueId);
     }
 }

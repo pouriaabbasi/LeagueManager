@@ -104,6 +104,10 @@ FROM    League AS L
 
         public LeagueModel UpdateLeague(UpdateLeagueModel model)
         {
+            if (model.IsCompleted)
+            {
+                DeleteExtraLeagueMatches(model.Id);
+            }
             var command = @"
 UPDATE  League
 SET     TypeId = @TypeId,
@@ -178,7 +182,7 @@ WHERE   LP.LeagueId = {leagueId}";
 
         public List<LeagueMatchModel> GetLeagueMatches(long leagueId)
         {
-            var query = @"
+            var query = $@"
 SELECT  LM.Id AS LeagueMatchId,
         LM.LeagueId,
         LM.FirstPlayerId,
@@ -193,7 +197,8 @@ SELECT  LM.Id AS LeagueMatchId,
 FROM    LeagueMatch AS LM
         INNER JOIN Player AS FP ON LM.FirstPlayerId = FP.Id
         INNER JOIN Player AS SP ON LM.SecondPlayerId = SP.Id
-        LEFT JOIN Player AS WP ON LM.WinnerPlayerId = WP.Id";
+        LEFT JOIN Player AS WP ON LM.WinnerPlayerId = WP.Id
+WHERE   LM.LeagueId = {leagueId}";
 
             var result = GetList<LeagueMatchModel>(query);
 
@@ -202,14 +207,45 @@ FROM    LeagueMatch AS LM
 
         public bool SetMatchResult(SetMatchResultModel model)
         {
-            var command = @"
+            var isFirstPlayerWinner = model.FirstPlayerScore > model.SecondPlayerScore;
+            var command = $@"
 UPDATE  LeagueMatch
 SET     FirstPlayerScore = @FirstPlayerScore,
         SecondPlayerScore = @SecondPlayerScore,
-        MatchDate = @MatchDate
+        MatchDate = @MatchDate,
+        WinnerPlayerId = {(isFirstPlayerWinner ? "FirstPlayerId" : "SecondPlayerId")}
 WHERE   Id = @LeagueMatchId";
 
             return ExecCommand(command, model);
+        }
+
+        public List<LeagueRankModel> GetLeagueRank(long leagueId)
+        {
+            var query = $@"
+WITH Winner(LeagueId, WinnerPlayerId, Win)
+AS
+(
+    SELECT  LeagueId,
+            WinnerPlayerId,
+            COUNT(*) AS Win
+    FROM    LeagueMatch
+    WHERE   LeagueId = {leagueId}
+            AND WinnerPlayerId IS NOT NULL
+    GROUP BY LeagueId, 
+            WinnerPlayerId
+)
+SELECT  RANK() OVER(ORDER BY W.Win DESC) AS Rank,
+        ISNULL(W.WinnerPlayerId, LP.PlayerId) AS WinnerPlayerId,
+        P.FirstName + ' ' + P.LastName AS WinnerPlayerFullName,
+        ISNULL(W.Win, 0) AS Win
+FROM    Winner AS W
+        RIGHT JOIN LeaguePlayer AS LP ON W.WinnerPlayerId = LP.PlayerId
+        LEFT JOIN Player AS P ON LP.PlayerId = P.Id
+WHERE   LP.LeagueId = {leagueId}";
+
+            var result = GetList<LeagueRankModel>(query);
+
+            return result;
         }
 
         private void InsertMatches(List<LeagueMatchModel> matches)
@@ -286,6 +322,15 @@ VALUES(
                 }
             }
             return result;
+        }
+
+        private bool DeleteExtraLeagueMatches(long leagueId)
+        {
+            var command = $@"
+DELETE FROM LeagueMatch
+WHERE   LeagueId = {leagueId}
+        AND MatchDate IS NULL";
+            return ExecCommand(command, null);
         }
     }
 }
