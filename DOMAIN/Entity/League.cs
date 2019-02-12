@@ -12,6 +12,7 @@ namespace leagueManager.DOMAIN.Entity
         public DateTime? EndDate { get; set; }
         public bool IsCompleted { get; set; }
         public string Title { get; set; }
+        public long? WinnerPlayerId { get; set; }
 
         public Type Type { get; set; }
         public ICollection<LeaguePlayer> LeaguePlayers { get; set; }

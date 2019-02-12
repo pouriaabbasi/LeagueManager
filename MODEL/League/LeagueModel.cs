@@ -16,5 +16,7 @@ namespace leagueManager.MODEL.League
         public bool IsCompleted { get; set; }
         public string Title { get; set; }
         public int PlayerCount { get; set; }
+        public long? WinnerPlayerId { get; set; }
+        public string WinnerPlayerFullName { get; set; }
     }
 }

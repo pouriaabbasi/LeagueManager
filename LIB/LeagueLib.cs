@@ -73,8 +73,11 @@ SELECT  Id,
         EndDate,
         IsCompleted,
         Title,
-        (SELECT COUNT(*) FROM LeaguePlayer WHERE LeagueId=L.Id) AS PlayerCount
+        (SELECT COUNT(*) FROM LeaguePlayer WHERE LeagueId=L.Id) AS PlayerCount,
+        WinnerPlayerId,
+        P.FirstName + ' ' + P.LastName AS WinnerPlayerFullName
 FROM    League AS L
+        LEFT JOIN Player AS P ON L.WinnerPlayerId = P.Id
 WHERE   Id = {leagueId}";
 
             var result = FitstOrDefault<LeagueModel>(query);
@@ -93,9 +96,12 @@ SELECT  L.Id,
         L.IsCompleted,
         L.Title,
         T.Name AS TypeName,
-        (SELECT COUNT(*) FROM LeaguePlayer WHERE LeagueId=L.Id) AS PlayerCount
+        (SELECT COUNT(*) FROM LeaguePlayer WHERE LeagueId=L.Id) AS PlayerCount,
+        L.WinnerPlayerId,
+        P.FirstName + ' ' + P.LastName AS WinnerPlayerFullName
 FROM    League AS L
-        INNER JOIN Type AS T ON L.TypeId = T.Id";
+        INNER JOIN Type AS T ON L.TypeId = T.Id
+        LEFT JOIN Player AS P ON L.WinnerPlayerId = P.Id";
 
             var result = GetList<LeagueModel>(query);
 
@@ -107,6 +113,7 @@ FROM    League AS L
             if (model.IsCompleted)
             {
                 DeleteExtraLeagueMatches(model.Id);
+                SetWinnerPlayer(model.Id);
             }
             var command = @"
 UPDATE  League
@@ -330,6 +337,17 @@ VALUES(
 DELETE FROM LeagueMatch
 WHERE   LeagueId = {leagueId}
         AND MatchDate IS NULL";
+            return ExecCommand(command, null);
+        }
+
+        private bool SetWinnerPlayer(long leagueId)
+        {
+            var ranks = GetLeagueRank(leagueId);
+            var command = $@"
+UPDATE  League
+SET     WinnerPlayerId = {ranks[0].WinnerPlayerId}
+WHERE   Id = {leagueId}";
+
             return ExecCommand(command, null);
         }
     }

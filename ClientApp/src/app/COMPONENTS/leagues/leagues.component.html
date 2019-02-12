@@ -6,6 +6,7 @@
   <div class="col col-md-1">START DATE</div>
   <div class="col col-md-1">END DATE</div>
   <div class="col col-md-1">IS COMPLETED</div>
+  <div class="col col-md-2">WINNER</div>
 </div>
 <div class="row" *ngFor="let league of leagues">
   <div class="col col-md-3">
@@ -23,12 +24,15 @@
   <div class="col col-md-1">
     <p>{{league.isCompleted}}</p>
   </div>
-  <div class="col col-md-5">
-    <button class="btn btn-warning" (click)="selectLeague(league)">edit</button>
-    <button class="btn btn-danger" (click)="deleteLeague(league)">delete</button>
-    <button class="btn btn-info" *ngIf="!league.isCompleted" (click)="addPlayerToLeague(league)">add player</button>
-    <button class="btn btn-default" (click)="showMatches(league.id)">show matches</button>
-    <button class="btn btn-success" (click)="getLeagueRank(league.id)">Show Table</button>
+  <div class="col col-md-2">
+    <p><b>{{league.winnerPlayerFullName || "- - - - - - - - - -"}}</b></p>
+  </div>
+  <div class="col col-md-3">
+    <button class="btn btn-warning" (click)="selectLeague(league)"><i class="fas fa-edit fa-lg"></i></button>
+    <button class="btn btn-danger" (click)="deleteLeague(league)"><i class="fas fa-trash-alt fa-lg"></i></button>
+    <button class="btn btn-info" *ngIf="!league.isCompleted" (click)="addPlayerToLeague(league)"><i class="fas fa-plus-square fa-lg"></i></button>
+    <button class="btn btn-default" (click)="showMatches(league.id)"><i class="fas fa-file-alt fa-lg"></i></button>
+    <button class="btn btn-success" (click)="getLeagueRank(league.id)"><i class="fas fa-table fa-lg"></i></button>
   </div>
 </div>
 

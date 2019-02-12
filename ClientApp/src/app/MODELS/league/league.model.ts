@@ -10,4 +10,6 @@ export class LeagueModel {
     isCompleted: boolean;
     title: string;
     playerCount: number;
+    winnerPlayerId: number;
+    winnerPlayerFullName: string;
 }
