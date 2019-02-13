@@ -29,13 +29,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { TypeModalComponent } from './COMPONENTS/types/type-modal/type-modal.component';
 import { LeaguesComponent } from './COMPONENTS/leagues/leagues.component';
 import { PlayerComponent } from './COMPONENTS/player/player.component';
+import { LeagueMatchesComponent } from './COMPONENTS/leagues/league-matches/league-matches.component';
+import { LeagueRankComponent } from './COMPONENTS/leagues/league-rank/league-rank.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent,
     DashboardComponent,
-    UserprofileComponent, TablelistComponent, TypoComponent, IconsComponent, MapsComponent, NotificationComponent, TypesComponent, TypeModalComponent, LeaguesComponent, PlayerComponent,
+    UserprofileComponent, TablelistComponent, TypoComponent, IconsComponent, MapsComponent, NotificationComponent, TypesComponent, TypeModalComponent, LeaguesComponent, PlayerComponent, LeagueMatchesComponent, LeagueRankComponent,
   ],
   imports: [
     FormsModule,

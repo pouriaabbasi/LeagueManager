@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col col-md-1">RANK</div>
+  <div class="col col-md-2">PLAYER NAME</div>
+  <div class="col col-md-1">WIN</div>
+</div>
+<div class="row" *ngFor="let leagueRank of leagueRanks">
+  <div class="col col-md-1">{{leagueRank.rank}}</div>
+  <div class="col col-md-2">{{leagueRank.winnerPlayerFullName}}</div>
+  <div class="col col-md-1">{{leagueRank.win}}</div>
+</div>

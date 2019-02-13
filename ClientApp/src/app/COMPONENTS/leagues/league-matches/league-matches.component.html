@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col col-md-1">#</div>
+  <div class="col col-md-2">FIRST PLAYER</div>
+  <div class="col col-md-2">FIRST PLAYER SCORE</div>
+  <div class="col col-md-2">SECOND PLAYER SCORE</div>
+  <div class="col col-md-2">SECOND PLAYER</div>
+  <div class="col col-md-1">MATCH DATE</div>
+</div>
+<div class="row" *ngFor="let match of matches;index as i">
+  <div class="col col-md-1">{{i+1}}</div>
+  <div class="col col-md-2">{{match.firstPlayerFullName}}</div>
+  <div class="col col-md-2">{{match.firstPlayerScore}}</div>
+  <div class="col col-md-2">{{match.secondPlayerScore}}</div>
+  <div class="col col-md-2">{{match.secondPlayerFullName}}</div>
+  <div class="col col-md-1">{{match.matchDatePersian}}</div>
+  <div class="col col-md-2">
+    <button class="btn btn-success" (click)="setMatchResult(match)" *ngIf="!match.matchDate">set result</button>
+    <p *ngIf="match.matchDate">{{match.winnerPlayerFullName}}</p>
+  </div>
+</div>
+
+<div *ngIf="matchResult">
+  <label for="firstPlayerScore">FIRST PLAYER SCORE : </label><input type="number" name="firstPlayerScore" id="firstPlayerScore"
+    [(ngModel)]="matchResult.firstPlayerScore">
+  <br>
+  <label for="secondPlayerScore">SECOND PLAYER SCORE : </label><input type="number" name="secondPlayerScore" id="secondPlayerScore"
+    [(ngModel)]="matchResult.secondPlayerScore">
+  <br>
+  <label for="matchDate">MATCH DATE : </label><input type="date" name="matchDate" id="matchDate" [(ngModel)]="matchResult.matchDate">
+  <br>
+  <button class="btn btn-info" (click)="setResult()">SUBMIT</button>
+</div>

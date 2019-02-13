@@ -143,21 +143,6 @@ export class LeaguesComponent implements OnInit {
     })
   }
 
-  private setMatchResult(match: LeagueMatchModel) {
-    this.matchResult = new SetMatchResultModel();
-    this.matchResult.leagueId = match.leagueId;
-    this.matchResult.leagueMatchId = match.leagueMatchId;
-  }
-
-  private setResult() {
-    this.leagueService.SetMatchResult(this.matchResult).subscribe(result => {
-      if (result) {
-        this.showMatches(this.matchResult.leagueId);
-        this.matchResult = null;
-      }
-    });
-  }
-
   private getLeagueRank(leagueId) {
     this.leagueService.GetLeagueRank(leagueId).subscribe(leagueRanks => {
       this.leagueRanks = leagueRanks;

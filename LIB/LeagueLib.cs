@@ -66,19 +66,19 @@ WHERE   Id = @Id";
         public LeagueModel GetLeague(long leagueId)
         {
             var query = $@"
-SELECT  Id,
-        TypeId,
-        Iteration,
-        StartDate,
-        EndDate,
-        IsCompleted,
-        Title,
+SELECT  L.Id,
+        L.TypeId,
+        L.Iteration,
+        L.StartDate,
+        L.EndDate,
+        L.IsCompleted,
+        L.Title,
         (SELECT COUNT(*) FROM LeaguePlayer WHERE LeagueId=L.Id) AS PlayerCount,
-        WinnerPlayerId,
+        L.WinnerPlayerId,
         P.FirstName + ' ' + P.LastName AS WinnerPlayerFullName
 FROM    League AS L
         LEFT JOIN Player AS P ON L.WinnerPlayerId = P.Id
-WHERE   Id = {leagueId}";
+WHERE   L.Id = {leagueId}";
 
             var result = FitstOrDefault<LeagueModel>(query);
 
