@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { PlayerService } from 'src/app/SERVICES/player.service';
 import { PlayerModel } from 'src/app/MODELS/player/player.model';
 import { AddPlayerModel } from 'src/app/MODELS/player/add-player.model';
 import { UpdatePlayerModel } from 'src/app/MODELS/player/update-player.model';
+import { TableHeaderActionModel } from 'src/app/MODELS/COMMON/table-header-action.model';
+import { TableColumnModel } from 'src/app/MODELS/COMMON/table-column.model';
 
 @Component({
   selector: 'app-player',
@@ -10,6 +12,15 @@ import { UpdatePlayerModel } from 'src/app/MODELS/player/update-player.model';
   styleUrls: ['./player.component.css']
 })
 export class PlayerComponent implements OnInit {
+  actions: TableHeaderActionModel[] = [
+    { name: "Add", icon: "add_circle", action: new EventEmitter() },
+    { name: "Edit", icon: "create", action: new EventEmitter<PlayerModel>(), mustSelect: true },
+    { name: "Delete", icon: "remove_circle", action: new EventEmitter<PlayerModel>(), mustSelect: true }
+  ]
+  columns: TableColumnModel[] = [
+    { caption: "First Name", dataMember: "firstName" },
+    { caption: "Last Name", dataMember: "lastName" },
+  ]
 
   players: PlayerModel[] = [];
   player: PlayerModel;

@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { Component, OnInit, EventEmitter } from '@angular/core';
+import { MatTableDataSource, MatSnackBar } from '@angular/material';
 import { TypeService } from 'src/app/SERVICES/type.service';
 import { TypeModel } from 'src/app/MODELS/type/type.model';
 import { UpdateTypeModel } from 'src/app/MODELS/type/update-type.model';
 import { AddTypeModel } from 'src/app/MODELS/type/add-type.model';
+import { SelectionModel } from '@angular/cdk/collections';
+import { TableHeaderActionModel } from 'src/app/MODELS/COMMON/table-header-action.model';
+import { TableColumnModel } from 'src/app/MODELS/COMMON/table-column.model';
 
 @Component({
   selector: 'app-types',
@@ -11,42 +14,58 @@ import { AddTypeModel } from 'src/app/MODELS/type/add-type.model';
   styleUrls: ['./types.component.css']
 })
 export class TypesComponent implements OnInit {
+  actions: TableHeaderActionModel[] = [
+    { name: "Add", icon: "add_circle", action: new EventEmitter() },
+    { name: "Edit", icon: "create", action: new EventEmitter<TypeModel>(), mustSelect: true },
+    { name: "Delete", icon: "remove_circle", action: new EventEmitter<TypeModel>(), mustSelect: true }
+  ]
+  columns: TableColumnModel[] = [
+    { caption: "Name", dataMember: "name" },
+    { caption: "Description", dataMember: "description" },
+    { caption: "P2P Play Count", dataMember: "p2PPlayCount" },
+    { caption: "Is Continuous", dataMember: "isContinuous" },
+  ]
 
-  // private displayedColumns: string[] = ['id', 'name', 'description', 'p2PPlayCount', 'isContinuous', 'actions'];
-  // private dataSource = new MatTableDataSource();
-  private types: TypeModel[] = [];
+  types: TypeModel[] = [];
   private type: TypeModel = null;
 
   constructor(
+    private snackBar: MatSnackBar,
     private typeService: TypeService
   ) { }
 
   ngOnInit() {
-    this.refreshGrid();
+    this.fetchDate();
+    this.actions[0].action.subscribe(() => {
+      this.newType();
+    })
+    this.actions[1].action.subscribe(type => {
+      this.editType(type);
+    })
+    this.actions[2].action.subscribe(type => {
+      this.deleteType(type);
+    })
   }
 
-  // private refreshGrid() {
-  //   this.typeService.GetTypes().subscribe(types => {
-  //     this.dataSource = new MatTableDataSource(types);
-  //   })
-  // }
-
-  private refreshGrid() {
+  private fetchDate() {
     this.typeService.GetTypes().subscribe(types => {
       this.types = types;
     })
   }
 
-  private selectType(type: TypeModel) {
-    this.type = type;
+  private newType() {
+    console.log("call new type");
   }
 
-  private newType() {
-    this.type = new TypeModel();
+  private editType(type: TypeModel) {
+    console.log("call edit type", type);
+  }
+
+  private deleteType(type: TypeModel) {
+    console.log("call delete type", type);
   }
 
   private submit() {
-    debugger;
     if (this.type) {
       if (this.type.id) {
         var updateTypeModel = new UpdateTypeModel();
@@ -56,7 +75,7 @@ export class TypesComponent implements OnInit {
         updateTypeModel.p2PPlayCount = this.type.p2PPlayCount;
         this.typeService.UpdateType(this.type.id, updateTypeModel).subscribe(type => {
           this.type = null;
-          this.refreshGrid();
+          // this.refreshGrid();
         })
       }
       if (!this.type.id) {
@@ -67,18 +86,9 @@ export class TypesComponent implements OnInit {
         addTypeModel.p2PPlayCount = this.type.p2PPlayCount;
         this.typeService.AddType(addTypeModel).subscribe(type => {
           this.type = null;
-          this.types.push(type);
+          // this.types.push(type);
         })
       }
     }
   }
-
-  private deleteType(type: TypeModel) {
-    if (confirm("Are U Sure !?")) {
-      this.typeService.DeleteType(type.id).subscribe(() => {
-        this.refreshGrid();
-      })
-    }
-  }
-
 }

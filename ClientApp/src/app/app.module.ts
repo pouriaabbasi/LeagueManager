@@ -31,13 +31,14 @@ import { LeaguesComponent } from './COMPONENTS/leagues/leagues.component';
 import { PlayerComponent } from './COMPONENTS/player/player.component';
 import { LeagueMatchesComponent } from './COMPONENTS/leagues/league-matches/league-matches.component';
 import { LeagueRankComponent } from './COMPONENTS/leagues/league-rank/league-rank.component';
+import { TableComponent } from './COMPONENTS/COMMON/table/table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent,
     DashboardComponent,
-    UserprofileComponent, TablelistComponent, TypoComponent, IconsComponent, MapsComponent, NotificationComponent, TypesComponent, TypeModalComponent, LeaguesComponent, PlayerComponent, LeagueMatchesComponent, LeagueRankComponent,
+    UserprofileComponent, TablelistComponent, TypoComponent, IconsComponent, MapsComponent, NotificationComponent, TypesComponent, TypeModalComponent, LeaguesComponent, PlayerComponent, LeagueMatchesComponent, LeagueRankComponent, TableComponent,
   ],
   imports: [
     FormsModule,

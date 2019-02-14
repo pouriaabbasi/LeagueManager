@@ -1,3 +1,6 @@
+<div class="row" *ngIf="leagues">
+  <app-table [title]="'Leagues'" [actions]="actions" [columns]="columns" [data]="leagues"></app-table>
+</div>
 <br>
 <button class="btn btn-success" (click)="newLeague()">ADD</button>
 <div class="row">
