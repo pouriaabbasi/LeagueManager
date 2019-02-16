@@ -1,12 +1,10 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { MatTableDataSource, MatSnackBar } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { TypeService } from 'src/app/SERVICES/type.service';
 import { TypeModel } from 'src/app/MODELS/type/type.model';
-import { UpdateTypeModel } from 'src/app/MODELS/type/update-type.model';
-import { AddTypeModel } from 'src/app/MODELS/type/add-type.model';
-import { SelectionModel } from '@angular/cdk/collections';
 import { TableHeaderActionModel } from 'src/app/MODELS/COMMON/table-header-action.model';
 import { TableColumnModel } from 'src/app/MODELS/COMMON/table-column.model';
+import { TypeModalComponent } from './type-modal/type-modal.component';
 
 @Component({
   selector: 'app-types',
@@ -17,7 +15,7 @@ export class TypesComponent implements OnInit {
   actions: TableHeaderActionModel[] = [
     { name: "Add", icon: "add_circle", action: new EventEmitter() },
     { name: "Edit", icon: "create", action: new EventEmitter<TypeModel>(), mustSelect: true },
-    { name: "Delete", icon: "remove_circle", action: new EventEmitter<TypeModel>(), mustSelect: true }
+    { name: "Delete", icon: "remove_circle", action: new EventEmitter<TypeModel>(), mustSelect: true, mustConfirm: true }
   ]
   columns: TableColumnModel[] = [
     { caption: "Name", dataMember: "name" },
@@ -30,12 +28,12 @@ export class TypesComponent implements OnInit {
   private type: TypeModel = null;
 
   constructor(
-    private snackBar: MatSnackBar,
-    private typeService: TypeService
+    private typeService: TypeService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
-    this.fetchDate();
+    this.fetchData();
     this.actions[0].action.subscribe(() => {
       this.newType();
     })
@@ -47,48 +45,39 @@ export class TypesComponent implements OnInit {
     })
   }
 
-  private fetchDate() {
+  private fetchData() {
     this.typeService.GetTypes().subscribe(types => {
       this.types = types;
     })
   }
 
   private newType() {
-    console.log("call new type");
+    const dialogRef = this.dialog.open(TypeModalComponent, {
+      autoFocus: true,
+      data: new TypeModel()
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        this.fetchData();
+    })
   }
 
   private editType(type: TypeModel) {
-    console.log("call edit type", type);
+    const dialogRef = this.dialog.open(TypeModalComponent, {
+      autoFocus: true,
+      data: type
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        this.fetchData();
+    })
   }
 
   private deleteType(type: TypeModel) {
-    console.log("call delete type", type);
-  }
-
-  private submit() {
-    if (this.type) {
-      if (this.type.id) {
-        var updateTypeModel = new UpdateTypeModel();
-        updateTypeModel.name = this.type.name;
-        updateTypeModel.description = this.type.description;
-        updateTypeModel.isContinuous = this.type.isContinuous;
-        updateTypeModel.p2PPlayCount = this.type.p2PPlayCount;
-        this.typeService.UpdateType(this.type.id, updateTypeModel).subscribe(type => {
-          this.type = null;
-          // this.refreshGrid();
-        })
-      }
-      if (!this.type.id) {
-        var addTypeModel = new AddTypeModel();
-        addTypeModel.name = this.type.name;
-        addTypeModel.description = this.type.description;
-        addTypeModel.isContinuous = this.type.isContinuous;
-        addTypeModel.p2PPlayCount = this.type.p2PPlayCount;
-        this.typeService.AddType(addTypeModel).subscribe(type => {
-          this.type = null;
-          // this.types.push(type);
-        })
-      }
-    }
+    this.typeService.DeleteType(type.id).subscribe(() => {
+      this.fetchData();
+    })
   }
 }

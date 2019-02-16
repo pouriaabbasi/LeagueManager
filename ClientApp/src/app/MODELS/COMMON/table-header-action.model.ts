@@ -5,4 +5,5 @@ export class TableHeaderActionModel {
     action?: EventEmitter<any>;
     icon?: string;
     mustSelect?: boolean;
+    mustConfirm?: boolean;
 }

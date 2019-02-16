@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { TableHeaderActionModel } from 'src/app/MODELS/COMMON/table-header-action.model';
-import { MatTableDataSource, MatSnackBar } from '@angular/material';
+import { MatTableDataSource, MatSnackBar, MatDialog } from '@angular/material';
 import { TableColumnModel } from 'src/app/MODELS/COMMON/table-column.model';
 import { SelectionModel } from '@angular/cdk/collections';
 import { BehaviorSubject } from 'rxjs';
+import { ConfirmComponent } from '../confirm/confirm.component';
 
 @Component({
   selector: 'app-table',
@@ -43,7 +44,8 @@ export class TableComponent implements OnInit {
   }
 
   constructor(
-    private snakBar: MatSnackBar
+    private snakBar: MatSnackBar,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -72,6 +74,15 @@ export class TableComponent implements OnInit {
         return;
       }
 
-    headerAction.action.next(headerAction.mustSelect ? this.selection.selected[0] : null);
+    if (headerAction.mustConfirm) {
+      this.dialog.open(ConfirmComponent, {
+        disableClose: true,
+      }).afterClosed().subscribe(result => {
+        if (result)
+          headerAction.action.next(headerAction.mustSelect ? this.selection.selected[0] : null);
+      })
+    }
+    else
+      headerAction.action.next(headerAction.mustSelect ? this.selection.selected[0] : null);
   }
 }

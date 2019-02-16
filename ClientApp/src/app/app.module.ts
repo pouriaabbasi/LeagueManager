@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatDialog, MatDialogModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatMenuModule } from '@angular/material/menu';
@@ -32,13 +32,14 @@ import { PlayerComponent } from './COMPONENTS/player/player.component';
 import { LeagueMatchesComponent } from './COMPONENTS/leagues/league-matches/league-matches.component';
 import { LeagueRankComponent } from './COMPONENTS/leagues/league-rank/league-rank.component';
 import { TableComponent } from './COMPONENTS/COMMON/table/table.component';
+import { ConfirmComponent } from './COMPONENTS/COMMON/confirm/confirm.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent,
     DashboardComponent,
-    UserprofileComponent, TablelistComponent, TypoComponent, IconsComponent, MapsComponent, NotificationComponent, TypesComponent, TypeModalComponent, LeaguesComponent, PlayerComponent, LeagueMatchesComponent, LeagueRankComponent, TableComponent,
+    UserprofileComponent, TablelistComponent, TypoComponent, IconsComponent, MapsComponent, NotificationComponent, TypesComponent, TypeModalComponent, LeaguesComponent, PlayerComponent, LeagueMatchesComponent, LeagueRankComponent, TableComponent, ConfirmComponent,
   ],
   imports: [
     FormsModule,
@@ -46,6 +47,7 @@ import { TableComponent } from './COMPONENTS/COMMON/table/table.component';
       apiKey: 'YOUR_GOOGLE_MAP_API_KEY'
     }),
     MatTableModule,
+    MatDialogModule,
     MatSnackBarModule,
     MatCheckboxModule,
     ChartModule,
@@ -108,6 +110,10 @@ import { TableComponent } from './COMPONENTS/COMMON/table/table.component';
     ]),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    TypeModalComponent,
+    ConfirmComponent
+  ]
 })
 export class AppModule { }
