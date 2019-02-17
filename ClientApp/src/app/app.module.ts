@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatDialog, MatDialogModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatDialog, MatDialogModule, MatSlideToggleModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatMenuModule } from '@angular/material/menu';
@@ -28,18 +28,41 @@ import { TypesComponent } from './COMPONENTS/types/types.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TypeModalComponent } from './COMPONENTS/types/type-modal/type-modal.component';
 import { LeaguesComponent } from './COMPONENTS/leagues/leagues.component';
-import { PlayerComponent } from './COMPONENTS/player/player.component';
 import { LeagueMatchesComponent } from './COMPONENTS/leagues/league-matches/league-matches.component';
 import { LeagueRankComponent } from './COMPONENTS/leagues/league-rank/league-rank.component';
 import { TableComponent } from './COMPONENTS/COMMON/table/table.component';
 import { ConfirmComponent } from './COMPONENTS/COMMON/confirm/confirm.component';
+import { PlayerModalComponent } from './COMPONENTS/players/player-modal/player-modal.component';
+import { PlayersComponent } from './COMPONENTS/players/players.component';
+import { LeagueModalComponent } from './COMPONENTS/leagues/league-modal/league-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+
     SidenavComponent,
     DashboardComponent,
-    UserprofileComponent, TablelistComponent, TypoComponent, IconsComponent, MapsComponent, NotificationComponent, TypesComponent, TypeModalComponent, LeaguesComponent, PlayerComponent, LeagueMatchesComponent, LeagueRankComponent, TableComponent, ConfirmComponent,
+
+    UserprofileComponent,
+    TablelistComponent,
+    TypoComponent,
+    IconsComponent,
+    MapsComponent,
+    NotificationComponent,
+
+    TableComponent,
+    ConfirmComponent,
+
+    TypesComponent,
+    TypeModalComponent,
+
+    PlayersComponent,
+    PlayerModalComponent,
+
+    LeaguesComponent,
+    LeagueMatchesComponent,
+    LeagueRankComponent,
+    LeagueModalComponent,
   ],
   imports: [
     FormsModule,
@@ -48,6 +71,7 @@ import { ConfirmComponent } from './COMPONENTS/COMMON/confirm/confirm.component'
     }),
     MatTableModule,
     MatDialogModule,
+    MatSlideToggleModule,
     MatSnackBarModule,
     MatCheckboxModule,
     ChartModule,
@@ -80,7 +104,7 @@ import { ConfirmComponent } from './COMPONENTS/COMMON/confirm/confirm.component'
       },
       {
         path: 'players',
-        component: PlayerComponent
+        component: PlayersComponent
       },
       //---------------------------------
       {
@@ -112,8 +136,10 @@ import { ConfirmComponent } from './COMPONENTS/COMMON/confirm/confirm.component'
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [
+    ConfirmComponent,
     TypeModalComponent,
-    ConfirmComponent
+    PlayerModalComponent,
+    LeagueModalComponent
   ]
 })
 export class AppModule { }
