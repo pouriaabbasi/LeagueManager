@@ -4,6 +4,8 @@ import { LeagueModel } from 'src/app/MODELS/league/league.model';
 import { LeagueService } from 'src/app/SERVICES/league.service';
 import { UpdateLeagueModel } from 'src/app/MODELS/league/update-league.model';
 import { AddLeagueModel } from 'src/app/MODELS/league/add-league.model';
+import { TypeService } from 'src/app/SERVICES/type.service';
+import { TypeModel } from 'src/app/MODELS/type/type.model';
 
 @Component({
   selector: 'app-league-modal',
@@ -12,13 +14,23 @@ import { AddLeagueModel } from 'src/app/MODELS/league/add-league.model';
 })
 export class LeagueModalComponent implements OnInit {
 
+  private types: TypeModel[] = [];
+
   constructor(
+    private leagueService: LeagueService,
+    private typeService: TypeService,
     private dialogRef: MatDialogRef<LeagueModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: LeagueModel,
-    private leagueService: LeagueService
+    @Inject(MAT_DIALOG_DATA) public data: LeagueModel
   ) { }
 
   ngOnInit() {
+    this.fetchTypes();
+  }
+
+  private fetchTypes() {
+    this.typeService.GetTypes().subscribe(types => {
+      this.types = types;
+    });
   }
 
   private submitLeague() {
@@ -52,6 +64,14 @@ export class LeagueModalComponent implements OnInit {
 
   private close() {
     this.dialogRef.close(false);
+  }
+
+  setDateReturn(e) {
+    console.log(e);
+  }
+
+  dpickerFocus(picker) {
+    picker.open();
   }
 
 }

@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatDialog, MatDialogModule, MatSlideToggleModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatDialog, MatDialogModule, MatSlideToggleModule, MatAutocompleteModule, MatSelectModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatMenuModule } from '@angular/material/menu';
@@ -35,6 +35,7 @@ import { ConfirmComponent } from './COMPONENTS/COMMON/confirm/confirm.component'
 import { PlayerModalComponent } from './COMPONENTS/players/player-modal/player-modal.component';
 import { PlayersComponent } from './COMPONENTS/players/players.component';
 import { LeagueModalComponent } from './COMPONENTS/leagues/league-modal/league-modal.component';
+import { MatDatepickerModulePersian } from '@angular-persian/material-date-picker';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,8 @@ import { LeagueModalComponent } from './COMPONENTS/leagues/league-modal/league-m
       apiKey: 'YOUR_GOOGLE_MAP_API_KEY'
     }),
     MatTableModule,
+    MatAutocompleteModule,
+    MatSelectModule,
     MatDialogModule,
     MatSlideToggleModule,
     MatSnackBarModule,
@@ -89,6 +92,7 @@ import { LeagueModalComponent } from './COMPONENTS/leagues/league-modal/league-m
     MatListModule,
     RouterModule,
     HttpClientModule,
+    MatDatepickerModulePersian,
     RouterModule.forRoot([
       {
         path: '',
